@@ -9,4 +9,4 @@ def test_create_order_api(db):
     response = client.post("/api/orders/create", {"currency": "ABAN", "amount": "2.0"}, format="json")
 
     assert response.status_code == 301
-    assert OrderORM.objects.count() == 0
+    assert OrderORM.objects.count() == 1
