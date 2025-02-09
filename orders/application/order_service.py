@@ -17,7 +17,6 @@ class OrderService:
             user_id=user_id,
             currency=currency,
             amount=amount,
-            status="PENDING",
             created_at=datetime.now()
         )
 

@@ -3,13 +3,14 @@ import uuid
 from datetime import datetime
 from exchanges.domain.models import ExchangeTransaction
 from exchanges.infrastructure.exchange_api import ExternalExchange
-
+from exchanges.infrastructure.repository_impl import DjangoExchangeTransactionRepository
 class ExchangeService:
 
-    def __init__(self, exchange_api: ExternalExchange):
+    def __init__(self, exchange_api: ExternalExchange, exchanges_repository: DjangoExchangeTransactionRepository):
         self.exchange_api = exchange_api
         self.pending_orders = []  
-        self.MIN_PURCHASE_AMOUNT = Decimal("10.0")  
+        self.MIN_PURCHASE_AMOUNT = Decimal("10.0") 
+        self.exchanges_repository = exchanges_repository
 
     def add_order(self, currency: str, amount: Decimal) -> ExchangeTransaction:
         transaction = ExchangeTransaction(
@@ -20,7 +21,8 @@ class ExchangeService:
             status="PENDING",
             created_at=datetime.now()
         )
-
+        self.exchanges_repository.save(transaction)
+        
         self.pending_orders.append(transaction)
         self.process_orders()  
 

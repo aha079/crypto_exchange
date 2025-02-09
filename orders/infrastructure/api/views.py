@@ -14,7 +14,7 @@ class OrderCreateView(View):
         order_service = OrderService()
         order = order_service.create_order(currency, amount)
 
-        return JsonResponse({"order_id": str(order.id), "currency": order.currency, "amount": str(order.amount)}, status=201)
+        return order.id
 
 class OrderListView(View):
 

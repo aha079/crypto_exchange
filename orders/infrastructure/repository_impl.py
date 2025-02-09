@@ -6,6 +6,7 @@ class DjangoOrderRepository(OrderRepository):
     def save(self, order: Order) -> None:
         OrderORM.objects.create(
             id=order.id,
+            user_id=order.user_id,
             currency=order.currency,
             amount=order.amount,
             created_at=order.created_at,
@@ -16,6 +17,7 @@ class DjangoOrderRepository(OrderRepository):
         order_orm = OrderORM.objects.get(id=order_id)
         return Order(
             id=order_orm.id,
+            user_id=order_orm.user_id,
             currency=order_orm.currency,
             amount=order_orm.amount,
             created_at=order_orm.created_at,

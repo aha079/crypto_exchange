@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'orders',
+    'exchanges',
     'django.contrib.admin',
     'django.contrib.sites',
     'django.contrib.auth',
@@ -77,9 +79,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# for running with docker-compose and postgres-db
+# DATABASES = {
+#     'default': dj_database_url.config(default='postgres://root:amir1379@db:5432/crypto_db')
+# }
+#for testing all test with sqlite3
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://root:amir1379@db:5432/crypto_db')
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
 }
 
 

@@ -1,5 +1,5 @@
 from orders.application.order_service import OrderService
-from orders.infrastructure.repositories.order_repository import OrderRepository
+from orders.infrastructure.repository_impl import DjangoOrderRepository
 from exchanges.application.exchange_service import ExchangeService
 from unittest.mock import MagicMock
 from decimal import Decimal

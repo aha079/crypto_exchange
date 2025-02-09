@@ -7,6 +7,7 @@ from datetime import datetime
 @dataclass
 class Order:
 	id: uuid.UUID
+	user_id: uuid.UUID
 	currency: str
 	amount: Decimal
 	created_at: datetime
