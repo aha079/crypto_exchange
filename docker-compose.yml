@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    container_name: crypto_exchange
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      -DATABASE_URL=postgres://root:amir1379@db:5432/crypto_db
+  db:
+    image: postgres
+    container_name: crypto_db
+    restart: always
+    environment:
+      POSTGRES_DB: crypto_db
+      POSTGRES_USER: root 
+      POSTGRES_PASSWORD: amir1379
+    ports:
+      - "5432:5432"
